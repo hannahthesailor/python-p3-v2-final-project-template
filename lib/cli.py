@@ -7,21 +7,26 @@ from helpers import (
 
 
 def main():
+    initialize_database()
+
     while True:
         menu()
-        choice = input("> ")
-        if choice == "0":
+        choice = input("Select Option")
+        if choice == "q":
             exit_program()
-        elif choice == "1":
-            helper_1()
+        elif choice == "b":
+            interact_with_blog_data()
+        elif choice == "p":
+            interact_with_post_data()
         else:
-            print("Invalid choice")
+            print("Invalid option!")
 
 
 def menu():
-    print("Please select an option:")
-    print("0. Exit the program")
-    print("1. Some useful function")
+    print("\nMain Menu")
+    print("b: Blog data")
+    print("p: Post data")
+    print("q: Quit the program\n")
 
 
 if __name__ == "__main__":
