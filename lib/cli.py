@@ -2,7 +2,9 @@
 
 from helpers import (
     exit_program,
-    helper_1
+    initialize_database,
+    interact_with_blog_data,
+    interact_with_post_data
 )
 
 

@@ -53,9 +53,11 @@ class Blog:
 
         Blog.all.append(self)
 
+#CRUD
+        
     @classmethod
     def create(cls, name):
-        # new blog and save
+        # create new blog and save
         blog = cls(name)
         blog.save()
         return blog

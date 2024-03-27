@@ -11,17 +11,6 @@ class Post:
         self.id = None
 
     @property
-    def text(self):
-        return self._text
-    
-    @text.setter
-    def text(self, text_add):
-        if(isinstance(text_add, str)) and (0 < len(text_add)):
-            self._text = text_add
-        else:
-            raise ValueError("Must contain at least one character!")
-        
-    @property
     def title(self):
         return self._title
     
@@ -31,6 +20,17 @@ class Post:
             self._title = title_add
         else:
             raise ValueError("Must be beteween 1 and 25 characters!")
+
+    @property
+    def text(self):
+        return self._text
+    
+    @text.setter
+    def text(self, text_add):
+        if(isinstance(text_add, str)) and (0 < len(text_add)):
+            self._text = text_add
+        else:
+            raise ValueError("Must contain at least one character!")
 
     @property
     def blog_id(self):
@@ -46,7 +46,7 @@ class Post:
     def __repr__(self):
         return f"<Post {self.id}: Title = {self.title}, Text = {self.text}, Blog ID = {self.blog_id}>"
 
-    # ORM methods
+    # CRUD methods
 
     @classmethod
     def create_table(cls):
@@ -56,7 +56,8 @@ class Post:
             id INTEGER PRIMARY KEY,
             title TEXT,
             text TEXT,
-            blog_id INTEGER)
+            blog_id INTEGER
+            )
         """
         CURSOR.execute(sql)
         CONN.commit()
@@ -114,7 +115,7 @@ class Post:
     def find_by_id(cls, id):
         sql = """
             SELECT *
-            FROM post
+            FROM posts
             WHERE id = ?
         """
 
