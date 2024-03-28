@@ -84,10 +84,14 @@ def options_for_view_posts():
     print("1: View post by id\n")
 
 def create_post():
-    name = input("Create new Post to Blog: ")
-    new_post = Post.create(name)
-    print("Title for new Post ")
-    print(new_post)
+    title = input("Enter the title for the new post: ")
+    text = input("Enter the text content for the new post: ")
+    blog_id = int(input("Enter the ID of the blog to which this post belongs: "))
+    new_post = Post.create(title, text, blog_id)
+    print("New Post created successfully:")
+    print("Title:", new_post.title)
+    print("Text:", new_post.text)
+    print("Belongs to Blog ID:", new_post.blog_id)
     user_choice = input("\nPress 'return' to continue...")
 
 def update_post():
