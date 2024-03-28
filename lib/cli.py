@@ -3,10 +3,17 @@
 from helpers import (
     exit_program,
     initialize_database,
-    interact_with_blog_data,
-    interact_with_post_data
+    # interact_with_blog_data,
+    # interact_with_post_data
 )
 
+from blog_helpers import (
+    interact_with_blog_data
+)
+
+from post_helpers import (
+    interact_with_post_data
+)
 
 def main():
     initialize_database()
