@@ -10,7 +10,7 @@ def initialize_database():
     Post.get_all
 
 def exit_program():
-    print("Bye!\n")
+    print("Ciao!\n")
     quit()
 
 def interact_with_blog_data():
