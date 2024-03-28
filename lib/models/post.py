@@ -148,6 +148,14 @@ class Post:
 
     
         Post.all = [post for post in Post.all if post.id != self.id]
+
+    @classmethod
+    def sorted_posts(cls):
+        cls.get_all()
+        # Sort posts by title alphabetically
+        return sorted(cls.all, key=lambda post: post.title)
+
+        
     
     def blog(self):
         # post belongs to blog
