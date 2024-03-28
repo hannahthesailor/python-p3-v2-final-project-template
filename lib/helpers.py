@@ -20,7 +20,7 @@ def interact_with_blog_data():
         if user_choice == 'c':
             create_blog()
             break
-        elif user_choice == 'r':
+        elif user_choice == 'v':
             view_blogs()
             break
         elif user_choice == 'pc':
@@ -39,7 +39,7 @@ def interact_with_blog_data():
 def blog_options_menu():
     print("\nBlog Menu!")
     print("c: Create a new blog")
-    print("r: View blog data")
+    print("v: View blog data")
     print("pc: Display post content")
     print("u: Update a blog")
     print("d: Delete a blog\n")
@@ -53,9 +53,8 @@ def view_blogs():
     while(True):
         if(user_choice == 'a'):
             print("\nAll Blogs:")
-            for blog in Blog.all:
-                print(blog)
-            # return to cont
+            all_blogs = Blog.get_all()
+            print(all_blogs)
             user_choice = input("\nPress 'return' to continue...")
             break
         elif(user_choice == '1'):
@@ -92,22 +91,35 @@ def create_blog():
     user_choice = input("\nPress 'return' to continue...")
 
 def post_content():
-    while(True):
-                try:
-                    user_choice = input("\nEnter the blog id to return posts: ")
-                    user_choice = int(user_choice)
-                    blog = Blog.find_by_id(user_choice)
-                    if(blog):
-                        print("\nBlogs Posts:")
-                        print(Blog.find_by_id(user_choice))
-                        user_choice = input("\nPress 'return' to continue...")
-                        break
-                    else:
-                        print("\nBlog Posts Not Found!")
-                        break
-                except:
-                    print("Invalid selection! Please try again!")
-                    break
+    while True:
+        try:
+            blog_id_input = input("\nEnter the blog id you want to return post titles for (press 'm' to return to main menu): ")
+            if blog_id_input.lower() == 'm':
+                break
+                
+            blog_id = int(blog_id_input)
+            blog = Blog.find_by_id(blog_id)
+            
+            if blog:
+                print("\nPosts for Blog:", blog.name)
+                posts = blog.posts()
+                if posts:
+                    print("\nPost Titles:")
+                    for post in posts:
+                        print(f"- {post.title}")
+                    input("\nPress 'return' to continue...")
+                else:
+                    print("No posts found for this blog.")
+            else:
+                print("\nBlog Not Found!")
+        except ValueError:
+            print("Invalid input! Please enter a valid blog ID.")
+        except Exception as e:
+            print("An error occurred:", e)
+
+
+
+
 
 def update_blog():
     while(True):
@@ -153,7 +165,7 @@ def interact_with_post_data():
         if(user_choice == 'c'):
             create_post()
             break
-        elif(user_choice == 'r'):
+        elif(user_choice == 'v'):
             view_posts()
             break
         elif(user_choice == 'u'):
@@ -170,9 +182,9 @@ def interact_with_post_data():
             break
         
 def post_options_menu():
-    print("\Post Menu!")
+    print("\nPost Menu!")
     print("c: Create a new post")
-    print("r: View post data")
+    print("v: View post data")
     print("u: Update a post")
     print("d: Delete a post")
     print("s: Sort posts alphabetically\n")
@@ -192,8 +204,8 @@ def view_posts():
     while(True):
         if(user_choice == 'a'):
             print("\nAll Posts:")
-            for post in Post.all:
-                print(post)
+            all_posts = Post.get_all()
+            print(all_posts)
             # return to continue
             user_choice = input("\nPress 'return' to continue...")
             break

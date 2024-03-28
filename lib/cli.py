@@ -13,7 +13,7 @@ def main():
 
     while True:
         menu()
-        choice = input("Select Option")
+        choice = input("\nSelect Option: ")
         if choice == "q":
             exit_program()
         elif choice == "b":

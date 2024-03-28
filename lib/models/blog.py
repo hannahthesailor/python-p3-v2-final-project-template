@@ -124,7 +124,7 @@ class Blog:
 
         sql = """
             SELECT *
-            FROM post
+            FROM posts
             WHERE posts.blog_id = ?
         """
 
